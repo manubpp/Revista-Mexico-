@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perspectiva Mx — Revista de Economía</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #0D0D0D;
+    --paper:     #F7F4EE;
+    --accent:    #1B4F72;
+    --gold:      #C9A84C;
+    --muted:     #6B6560;
+    --rule:      #D4CFC8;
+    --white:     #FFFFFF;
+    --light-bg:  #EEE9E0;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: #2B2B2B;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 0 60px;
+  }
+
+  /* ── PAGE ── */
+  .page {
+    width: 794px;
+    min-height: 1123px;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.55);
+  }
+
+  /* ── RUNNING HEADER ── */
+  .running-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px 10px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .running-head .brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .running-head .section-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .running-head .pg {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── CONTENT AREA ── */
+  .content { padding: 36px 40px 40px; flex: 1; }
+
+  /* ── TYPOGRAPHY UTILITIES ── */
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .display {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    line-height: 1.08;
+    color: var(--ink);
+  }
+  .serif-body {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .body-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #2C2C2C;
+  }
+  .body-text p { margin-bottom: 14px; }
+  .body-text p:last-child { margin-bottom: 0; }
+  .caption {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 20px 0; }
+  .rule-bold { border: none; border-top: 2px solid var(--ink); margin: 20px 0; }
+  .rule-gold { border: none; border-top: 2px solid var(--gold); margin: 20px 0; }
+
+  /* ── COLUMNS ── */
+  .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .col-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .col-6040 { display: grid; grid-template-columns: 60% 38%; gap: 2%; }
+  .col-4060 { display: grid; grid-template-columns: 38% 60%; gap: 2%; }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 4px solid var(--gold);
+    padding: 14px 20px;
+    margin: 20px 0;
+    background: var(--light-bg);
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--accent);
+  }
+  .pull-quote cite {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* ── ACCENT BOX ── */
+  .accent-box {
+    background: var(--accent);
+    color: var(--white);
+    padding: 20px 24px;
+    margin: 18px 0;
+  }
+  .accent-box p { font-size: 13px; line-height: 1.65; color: var(--white); }
+  .accent-box .box-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .gold-box {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 20px 24px;
+    margin: 18px 0;
+  }
+  .gold-box p { font-size: 13px; line-height: 1.65; }
+
+  /* ── STAT BLOCK ── */
+  .stat-block {
+    border: 2px solid var(--gold);
+    padding: 16px 20px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .stat-block .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+  }
+  .stat-block .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── IMAGE PLACEHOLDER ── */
+  .img-placeholder {
+    background: var(--light-bg);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .img-placeholder span { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── VIDEO PLACEHOLDER ── */
+  .video-frame {
+    background: var(--ink);
+    border: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+  }
+  .video-frame .play-btn {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-frame .play-btn::after {
+    content: '';
+    border: solid transparent;
+    border-left: 22px solid var(--ink);
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    margin-left: 6px;
+  }
+  .video-frame .video-label {
+    color: var(--white);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .video-frame .video-title {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 24px;
+    line-height: 1.3;
+  }
+
+  /* ── TOC ITEM ── */
+  .toc-item {
+    display: grid;
+    grid-template-columns: 36px 1fr 28px;
+    align-items: start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 12px;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .toc-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .toc-desc {
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+  .toc-pg {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: right;
+  }
+
+  /* ── TEAM PAGE ── */
+  .team-card {
+    border: 1px solid var(--rule);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--white);
+  }
+  .team-avatar {
+    width: 44px; height: 44px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .team-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .team-role { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+  /* ── INFOGRAPHIC ELEMENTS ── */
+  .info-node {
+    background: var(--white);
+    border: 2px solid var(--accent);
+    padding: 16px 18px;
+    position: relative;
+  }
+  .info-node h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .info-node ul { padding-left: 16px; }
+  .info-node ul li {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .info-node-gold {
+    background: var(--gold);
+    border: none;
+    padding: 16px 18px;
+  }
+  .info-node-gold h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .info-node-gold ul { padding-left: 16px; }
+  .info-node-gold ul li { font-size: 11.5px; line-height: 1.6; color: var(--ink); margin-bottom: 3px; }
+  .info-node-dark {
+    background: var(--accent);
+    border: none;
+    padding: 16px 18px;
+  }
+  .info-node-dark h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .info-node-dark ul { padding-left: 16px; }
+  .info-node-dark ul li { font-size: 11.5px; line-height: 1.6; color: var(--white); margin-bottom: 3px; }
+
+  /* ── INFOGRAPHIC ENHANCEMENTS ── */
+  .infographic-timeline { position: relative; display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
+  .info-step { position: relative; display: flex; flex-direction: column; gap: 10px; }
+  .info-arrow { text-align: center; color: var(--gold); font-size: 24px; font-weight: 900; line-height: 1; }
+  .portrait-silhouette { overflow: hidden; } 
+  .portrait-silhouette img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ── COVER ── */
+  .cover-top-bar {
+    background: var(--ink);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-top-bar span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .cover-hero {
+    background: var(--accent);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 40px 40px;
+    position: relative;
+    min-height: 580px;
+  }
+  .cover-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #1B4F72 0%, #0a1e2d 100%);
+    opacity: 0.92;
+  }
+  .cover-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.06) 0px, rgba(201,168,76,0.06) 1px, transparent 1px, transparent 40px),
+                      repeating-linear-gradient(-45deg, rgba(201,168,76,0.06) 0px, rgba(201,168,76,0.06) 1px, transparent 1px, transparent 40px);
+  }
+  .cover-content { position: relative; z-index: 2; }
+  .cover-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-subtitle {
+    font-size: 13px;
+    color: rgba(247,244,238,0.75);
+    line-height: 1.6;
+    max-width: 440px;
+    margin-bottom: 32px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+  }
+  .cover-bottom {
+    background: var(--ink);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-bottom .issue { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+  .cover-bottom .tagline { font-size: 11px; color: rgba(255,255,255,0.5); font-style: italic; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .section-divider .divider-line { flex: 1; height: 1px; background: var(--rule); }
+  .section-divider .divider-text {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ── DATELINE ── */
+  .dateline {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .dateline::before { content: ''; display: block; width: 20px; height: 2px; background: var(--gold); }
+
+  /* ── ARTICLE HEADLINE ── */
+  .article-hed { font-family: 'Playfair Display', serif; font-weight: 900; line-height: 1.1; color: var(--ink); margin-bottom: 14px; }
+  .article-deck { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 20px; font-style: italic; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    border-top: 1px solid var(--rule);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  .page-footer .footer-brand { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+  .page-footer .footer-pg {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* ── LABEL TAG ── */
+  .label-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+  }
+  .label-tag-gold {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+  }
+
+  /* ── KEYNES PORTRAIT ── */
+  .portrait-box {
+    background: var(--light-bg);
+    border: 2px solid var(--accent);
+    padding: 16px;
+    text-align: center;
+  }
+  .portrait-silhouette {
+    width: 80px; height: 80px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .portrait-silhouette svg { fill: var(--white); width: 48px; height: 48px; }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 1 — PORTADA
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Portada">
+  <div class="cover-top-bar">
+    <span>Economía · México · Junio 2026</span>
+    <span>Vol. I — Núm. 1</span>
+  </div>
+  <div class="cover-hero">
+    <div class="cover-pattern"></div>
+    <div class="cover-content">
+      <span class="cover-eyebrow">Revista de Economía</span>
+      <div class="cover-title">Perspectiva<br><span>Mx</span></div>
+      <p class="cover-subtitle">De las crisis globales que transformaron la industria al peso de la deuda y el consumismo actual: un análisis de las políticas económicas, el costo ambiental y los grandes desafíos de la salud pública en México.</p>
+      <span class="cover-badge">Exclusiva: ¿Conoces lo qué es la deuda externa?</span>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <span class="issue">Junio 2026</span>
+    <span class="tagline">México en Perspectiva</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 2 — EQUIPO
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Equipo">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Equipo Editorial</span><span class="pg">02</span></div>
+  <div class="content">
+    <span class="eyebrow">Quiénes somos</span>
+    <h1 class="display" style="font-size:48px; margin-bottom:8px;">El Equipo</h1>
+    <hr class="rule-gold">
+    <p class="body-text" style="margin-bottom:32px;"><p>Esta edición es el resultado del trabajo colaborativo de cinco investigadores comprometidos con el análisis económico de México desde una perspectiva crítica y accesible.</p></p>
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div class="team-card"><div class="team-avatar">B</div><div><div class="team-name">Balam Puc Diego Emmanuel</div><div class="team-role">Investigador · Redacción</div></div></div>
+      <div class="team-card"><div class="team-avatar">C</div><div><div class="team-name">Chulines Couoh Adriel Obed</div><div class="team-role">Investigador · Redacción</div></div></div>
+      <div class="team-card"><div class="team-avatar">H</div><div><div class="team-name">Hernandez Gutierrez Libna Dariana</div><div class="team-role">Investigadora · Redacción</div></div></div>
+      <div class="team-card"><div class="team-avatar">M</div><div><div class="team-name">Mejia Hernandez Sofia Ximena</div><div class="team-role">Investigadora · Redacción</div></div></div>
+      <div class="team-card"><div class="team-avatar">R</div><div><div class="team-name">Ripoll Lopez Santiago</div><div class="team-role">Investigador · Redacción</div></div></div>
+    </div>
+    <div class="accent-box" style="margin-top:32px;">
+      <span class="box-label">Institución</span>
+      <p>Trabajo académico desarrollado en el marco del programa de Economía. Junio 2026.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">02</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 3 — TABLA DE CONTENIDOS
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Contenido">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Contenido</span><span class="pg">03</span></div>
+  <div class="content">
+    <span class="eyebrow">En este número</span>
+    <h1 class="display" style="font-size:48px; margin-bottom:4px;">Contenido</h1>
+    <hr class="rule-gold" style="margin-bottom:0;">
+    <div style="margin-top:4px;">
+      <div class="toc-item"><div class="toc-num">04</div><div><div class="toc-title">Editorial</div><div class="toc-desc">México en Perspectiva: Del Giro Industrial a los Retos del Bienestar</div></div><div class="toc-pg">04</div></div>
+      <div class="toc-item"><div class="toc-num">05</div><div><div class="toc-title">Nota Periodística 1 · Primera Guerra Mundial</div><div class="toc-desc">El impacto industrial: Cómo la Primera Guerra Mundial transformó al sector empresarial</div></div><div class="toc-pg">05</div></div>
+      <div class="toc-item"><div class="toc-num">06</div><div><div class="toc-title">La industria petrolera en la 1GM</div><div class="toc-desc">México, PEMEX y el petróleo como arma estratégica global</div></div><div class="toc-pg">06</div></div>
+      <div class="toc-item"><div class="toc-num">07</div><div><div class="toc-title">El efecto de la 1GM sobre las empresas</div><div class="toc-desc">Quiebras, militarización y reconversión industrial</div></div><div class="toc-pg">07</div></div>
+      <div class="toc-item"><div class="toc-num">08</div><div><div class="toc-title">¿Qué ocurre con las empresas en tiempos de guerra?</div><div class="toc-desc">Adaptación, supervivencia y reflexión crítica</div></div><div class="toc-pg">08</div></div>
+      <div class="toc-item"><div class="toc-num">09</div><div><div class="toc-title">Economía ambiental · Cambio climático en México</div><div class="toc-desc">UNAM advierte efectos adversos sobre el PIB</div></div><div class="toc-pg">09</div></div>
+      <div class="toc-item"><div class="toc-num">10</div><div><div class="toc-title">El precio invisible de la contaminación</div><div class="toc-desc">Externalidades que paga la sociedad</div></div><div class="toc-pg">10</div></div>
+      <div class="toc-item"><div class="toc-num">11</div><div><div class="toc-title">¿Por qué importa la economía ambiental?</div><div class="toc-desc">Recursos, ecosistemas y generaciones futuras</div></div><div class="toc-pg">11</div></div>
+      <div class="toc-item"><div class="toc-num">12</div><div><div class="toc-title">Principios básicos de la economía ambiental</div><div class="toc-desc">Quien contamina, paga. La regla que cambia todo.</div></div><div class="toc-pg">12</div></div>
+      <div class="toc-item"><div class="toc-num">13</div><div><div class="toc-title">Consumismo y economía familiar</div><div class="toc-desc">Compras impulsivas, deudas y el fin del ahorro</div></div><div class="toc-pg">13</div></div>
+      <div class="toc-item"><div class="toc-num">14</div><div><div class="toc-title">Consumismo en México · De apariencias y deudas</div><div class="toc-desc">Greenpeace, cambio climático e injusticia social</div></div><div class="toc-pg">14</div></div>
+      <div class="toc-item"><div class="toc-num">15</div><div><div class="toc-title">Consumismo: ¿aliado o enemigo?</div><div class="toc-desc">Ni malo ni bueno — depende de cómo se practique</div></div><div class="toc-pg">15</div></div>
+      <div class="toc-item"><div class="toc-num">16</div><div><div class="toc-title">Salud en México: saturación y atención humana</div><div class="toc-desc">IMSS, ISSSTE, INSABI y la crisis de medicamentos</div></div><div class="toc-pg">16</div></div>
+      <div class="toc-item"><div class="toc-num">17</div><div><div class="toc-title">El reto del acceso a la salud</div><div class="toc-desc">Artículo 4° constitucional vs. realidad</div></div><div class="toc-pg">17</div></div>
+      <div class="toc-item"><div class="toc-num">18</div><div><div class="toc-title">Acceso a la salud por parte de la población</div><div class="toc-desc">Desigualdad geográfica y calidad del personal médico</div></div><div class="toc-pg">18</div></div>
+      <div class="toc-item"><div class="toc-num">19</div><div><div class="toc-title">Nota Periodística 2 · Gasto de bolsillo</div><div class="toc-desc">Acceso a la salud: El impacto en la economía familiar</div></div><div class="toc-pg">19</div></div>
+      <div class="toc-item"><div class="toc-num">20</div><div><div class="toc-title">Artículo de Opinión 1 · Consumismo</div><div class="toc-desc">El alto precio de comprar por comprar</div></div><div class="toc-pg">20</div></div>
+      <div class="toc-item"><div class="toc-num">21</div><div><div class="toc-title">Artículo de Opinión 2 · Economía ambiental</div><div class="toc-desc">Más allá del crecimiento ciego</div></div><div class="toc-pg">21</div></div>
+      <div class="toc-item"><div class="toc-num">22</div><div><div class="toc-title">Exclusiva · VIDEO: La deuda externa</div><div class="toc-desc">¿Conoces lo qué es la deuda pública?</div></div><div class="toc-pg">22</div></div>
+      <div class="toc-item"><div class="toc-num">23</div><div><div class="toc-title">La tela reemplaza al plástico</div><div class="toc-desc">Reportaje: políticas ambientales en la vida cotidiana</div></div><div class="toc-pg">23</div></div>
+      <div class="toc-item"><div class="toc-num">24</div><div><div class="toc-title">Infografía · De la crisis de 1929 al modelo keynesiano</div><div class="toc-desc">Causas, consecuencias y respuesta económica</div></div><div class="toc-pg">24</div></div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">03</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 4 — EDITORIAL
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Editorial">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Editorial</span><span class="pg">04</span></div>
+  <div class="content">
+    <span class="eyebrow">Editorial</span>
+    <h1 class="display" style="font-size:36px; margin-bottom:10px;">México en Perspectiva: Del Giro Industrial a los Retos del Bienestar</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Comprender el México de hoy exige analizar las fuerzas globales y locales que nos han dado forma. La estructura industrial contemporánea es heredera directa de las grandes crisis del siglo pasado: eventos que transformaron la producción, consolidaron al petróleo como motor mundial y redefinieron el papel de las empresas en tiempos de incertidumbre.</p>
+        <p>En nuestra realidad nacional, esos ecos históricos se entrelazan con el complejo peso de la deuda exterior, un factor financiero que condiciona las decisiones del Estado y limita el margen de maniobra de las políticas públicas.</p>
+        <div class="pull-quote">
+          <p>"Hoy vivimos en un hipermaterialismo donde las finanzas se deglutieron a la economía real. Necesitamos revertir esa ecuación maligna para que la política vuelva a controlar el destino de los recursos."</p>
+          <cite>— Alfredo Jalife-Rahme, analista económico</cite>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Mientras el consumismo empuja a las familias mexicanas a dinámicas de gasto desmedido que comprometen su estabilidad, el modelo de desarrollo general sigue omitiendo el precio invisible de la contaminación.</p>
+        <p>La economía ambiental ya no es una teoría alternativa, sino una urgencia matemática: el daño ecológico representa un costo real que frena el progreso. Por ello, las políticas económicas vigentes enfrentan la necesidad impostergable de alinearse con un desarrollo sustentable genuino.</p>
+        <p>Finalmente, la eficacia de cualquier modelo económico se mide en la calidad de vida de su población, y es ahí donde México enfrenta su reto más humano: los grandes desafíos de la salud pública. El acceso equitativo a servicios médicos dignos y el fortalecimiento del personal sanitario son asignaturas pendientes que resienten las presiones presupuestales del país.</p>
+        <div class="accent-box">
+          <span class="box-label">Esta edición analiza</span>
+          <p>Las transformaciones industriales del pasado, el pulso diario del consumo, la deuda y la salud en México — el engranaje que define nuestro bienestar colectivo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">04</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 5 — NOTA PERIODÍSTICA 1
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Nota 1 - Primera Guerra Mundial">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Nota Periodística</span><span class="pg">05</span></div>
+  <div class="content">
+    <span class="label-tag">Nota Periodística · 1</span>
+    <div class="dateline">10 de marzo de 2026</div>
+    <h1 class="article-hed" style="font-size:32px;">El impacto industrial: Cómo la Primera Guerra Mundial transformó al sector empresarial</h1>
+    <p class="article-deck">Durante 1914–1918, las empresas de las potencias involucradas reestructuraron radicalmente sus modelos de producción para sostener una "economía de guerra" sin precedentes históricos.</p>
+    <hr class="rule">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Durante el periodo de 1914 a 1918, el estallido de la Primera Guerra Mundial en Europa y sus frentes globales obligó a las empresas de las potencias involucradas a reestructurar radicalmente sus modelos de producción para sostener lo que se denominó una "economía de guerra". Este fenómeno ocurrió porque los gobiernos necesitaban satisfacer de manera urgente la masiva demanda de insumos militares y asegurar el racionamiento de recursos para la población civil.</p>
+        <p>Para lograr esta transformación, el Estado asumió un control sin precedentes sobre la economía privada. Las fábricas de automóviles, acero y químicos abandonaron la producción de bienes de consumo civil para ensamblar tanques, armamento y gases industriales.</p>
+        <div class="stat-block">
+          <span class="stat-num">1914</span>
+          <span class="stat-label">Inicio del conflicto que redefinió la industria mundial</span>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Además, debido a que millones de hombres fueron enviados al frente de batalla, las empresas se vieron en la necesidad de incorporar masivamente a las mujeres en la fuerza laboral industrial, cambiando la demografía de las fábricas de forma permanente.</p>
+        <p>A nivel microeconómico, esto significó que las empresas enfrentaron escasez de materias primas, controles de precios dictados por el gobierno y altos niveles de inflación.</p>
+        <div class="pull-quote">
+          <p>"Las transformaciones industriales que surgieron durante esos años continuaron después de la guerra, influyendo en el desarrollo económico del siglo XX."</p>
+        </div>
+        <p>Tras la firma del armisticio, las industrias que se habían enriquecido con contratos gubernamentales tuvieron que enfrentar el difícil y costoso reto de reconvertir nuevamente su maquinaria para tiempos de paz, dejando un panorama empresarial profundamente alterado por la intervención estatal.</p>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">05</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 6 — INDUSTRIA PETROLERA
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Industria Petrolera 1GM">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Historia Económica</span><span class="pg">06</span></div>
+  <div class="content">
+    <span class="eyebrow">Historia Económica</span>
+    <h1 class="display" style="font-size:34px; margin-bottom:10px;">La industria petrolera en la Primera Guerra Mundial</h1>
+    <hr class="rule-gold">
+    <div class="col-6040">
+      <div class="body-text">
+        <p>La industria Petrolera de México (actualmente PEMEX) tuvo una participación estratégica durante la Primera Guerra Mundial. Aunque México no contaba con PEMEX en ese periodo, su producción petrolera —principalmente de la Huasteca Veracruzana— fue crucial para los Aliados, abasteciendo a la flota inglesa.</p>
+        <p>Cuando Estados Unidos entró en la guerra en 1917, su producción interna no bastaba para cubrir su demanda doméstica. Esto se debió a la creciente adopción de vehículos motorizados y barcos que usaban petróleo en lugar de carbón. Para cerrar esa brecha, comenzó a importar masivamente desde México, con promedios de 2.5 a 4 millones de barriles mensuales.</p>
+        <p>Sin embargo, el 97% de la industria en México estaba en manos extranjeras. Por ello, el 11 de diciembre de 1917 se promulgó el <strong>Artículo 27</strong>, que otorgaba al gobierno mexicano los derechos permanentes sobre todos los recursos del subsuelo, generando tensiones inmediatas con las compañías extranjeras.</p>
+        <p>Para satisfacer la demanda de guerra, las compañías extranjeras realizaron inversiones masivas que luego heredaría la nación: oleoductos, terminales marítimas en Tampico y Tuxpan, y las primeras refinerías modernas.</p>
+      </div>
+      <div>
+        <div class="stat-block" style="margin-bottom:16px;">
+          <span class="stat-num">#2</span>
+          <span class="stat-label">México: segundo productor mundial de petróleo en 1917</span>
+        </div>
+        <div class="stat-block" style="margin-bottom:16px;">
+          <span class="stat-num">63.8M</span>
+          <span class="stat-label">Barriles producidos en 1917</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num">1938</span>
+          <span class="stat-label">Fundación de PEMEX</span>
+        </div>
+        <div class="accent-box" style="margin-top:16px;">
+          <span class="box-label">Impacto duradero</span>
+          <p>México modernizó su infraestructura, aumentó su recaudación y, sobre todo, ganó el derecho legal sobre sus recursos naturales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">06</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 7 — EFECTO 1GM EMPRESAS
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Efecto 1GM en Empresas">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Historia Económica</span><span class="pg">07</span></div>
+  <div class="content">
+    <span class="eyebrow">Análisis histórico</span>
+    <h1 class="display" style="font-size:34px; margin-bottom:10px;">El efecto de la Primera Guerra Mundial sobre las empresas</h1>
+    <hr class="rule-gold">
+    <div class="gold-box" style="margin-bottom:20px;">
+      <p><strong>La Primera Guerra Mundial (1914–1918)</strong> no solo transformó la política y las fronteras del mundo; también alteró profundamente la estructura económica de muchos países y redefinió el papel del sector privado en la economía global.</p>
+    </div>
+    <div class="col-2">
+      <div class="body-text">
+        <p>Las empresas, que hasta entonces funcionaban bajo dinámicas comerciales relativamente estables, se vieron obligadas a adaptarse a una realidad marcada por la escasez, la intervención estatal y la prioridad absoluta del esfuerzo bélico. En este contexto, muchas compañías quebraron, mientras que otras se militarizaron para apoyar a sus gobiernos.</p>
+        <p>El conflicto provocó la quiebra de numerosas empresas, especialmente aquellas que dependían del comercio internacional o de materias primas provenientes del extranjero. El bloqueo naval, la destrucción de rutas comerciales y la movilización masiva de trabajadores redujeron la producción y el consumo en varios sectores.</p>
+      </div>
+      <div class="body-text">
+        <p>Negocios pequeños y medianos fueron particularmente vulnerables, ya que carecían de reservas económicas o de apoyo estatal para resistir una economía dominada por la guerra. Industrias dedicadas a bienes de lujo o productos no esenciales perdieron mercado rápidamente.</p>
+        <p>Sin embargo, mientras algunas empresas desaparecían, otras se transformaron radicalmente. Muchos gobiernos comenzaron a intervenir directamente en la economía, orientando la producción hacia la fabricación de armamento, vehículos militares, uniformes y alimentos enlatados.</p>
+        <div class="accent-box">
+          <span class="box-label">Conclusión</span>
+          <p>En tiempos de guerra, la supervivencia empresarial depende menos del mercado tradicional y más de la capacidad de adaptarse a un entorno dominado por intereses políticos y militares.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">07</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 8 — EMPRESAS EN TIEMPOS DE GUERRA
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Empresas en tiempos de guerra">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Análisis</span><span class="pg">08</span></div>
+  <div class="content">
+    <span class="eyebrow">Análisis · Opinión</span>
+    <h1 class="display" style="font-size:34px; margin-bottom:10px;">¿Qué ocurre con las empresas en tiempos de guerra?</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Las guerras a menudo determinan el uso de los recursos naturales, la producción de bienes, la disponibilidad de mano de obra y la oportunidad para que las empresas generen ganancias gracias a sus esfuerzos por apoyar al país en tiempos de crisis.</p>
+        <p>Muchas industrias tuvieron que cambiar rápidamente su forma de producir para responder a las necesidades de los países que participaban en la guerra. Las industrias aceleraron sus ciclos de producción y comenzaron a contratar más trabajadores para poder satisfacer la gran demanda de materiales, armas y suministros militares.</p>
+        <div class="pull-quote">
+          <p>"La guerra demostró que las empresas pueden adaptarse muy rápido cuando enfrentan una situación difícil."</p>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Los conflictos armados han dado a algunos empresarios las oportunidades para demostrar patriotismo, a la vez que les han brindado la oportunidad de mejorar los resultados de sus empresas. Durante la guerra, los salarios de los ejecutivos de muchas empresas aumentaron, mientras que los de los trabajadores se ajustaron modestamente para compensar la inflación.</p>
+        <p>Aun así, no se puede ignorar que este crecimiento ocurrió en medio de un contexto muy duro. Mientras algunas empresas lograban producir más y ganar dinero, millones de personas sufrían las consecuencias del conflicto.</p>
+        <div class="accent-box">
+          <span class="box-label">Reflexión crítica</span>
+          <p>Aunque la guerra impulsó cambios importantes en las empresas, el verdadero desarrollo económico debería lograrse en tiempos de paz, donde el progreso beneficie a la sociedad sin depender de la destrucción o los conflictos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">08</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 9 — ECONOMÍA AMBIENTAL
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Economía Ambiental">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Economía Ambiental</span><span class="pg">09</span></div>
+  <div class="content">
+    <span class="eyebrow">Economía Ambiental</span>
+    <h1 class="display" style="font-size:34px; margin-bottom:6px;">Crece la importancia de la economía ambiental</h1>
+    <div class="label-tag-gold" style="margin-bottom:14px;">Advierten efectos adversos del cambio climático en la economía mexicana</div>
+    <hr class="rule">
+    <div class="col-2">
+      <div class="body-text">
+        <p>De acuerdo con información publicada en la ANUIES el 24 de abril de 2024 sobre una investigación de la Universidad Nacional Autónoma de México (UNAM), el cambio climático podría tener efectos negativos importantes en la economía mexicana en las próximas décadas.</p>
+        <p>Durante el Seminario de los Avances de Investigación 2024, el director del Instituto de Investigaciones Económicas, <strong>Armando Sánchez Vargas</strong>, advirtió que las constantes variaciones en la temperatura y en las precipitaciones, como consecuencia del calentamiento global, generan efectos adversos sobre el crecimiento económico del país.</p>
+        <div class="stat-block">
+          <span class="stat-num">−1.76%</span>
+          <span class="stat-label">Reducción máxima del crecimiento económico por cada 1% de aumento en temperatura</span>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Según los estudios presentados, cuando la temperatura aumenta un 1%, el crecimiento económico nacional puede disminuir entre −0.77% y −1.76%. Además, hacia el año 2100 el aumento de temperatura y los cambios en las precipitaciones podrían provocar una reducción del PIB per cápita de México.</p>
+        <p>Sánchez Vargas también señaló que el cambio climático afecta especialmente al sector primario, como la agricultura, la ganadería y la pesca, ya que estas actividades dependen directamente de las condiciones climáticas. Las comunidades menos desarrolladas suelen ser las más vulnerables ante los fenómenos meteorológicos extremos.</p>
+        <div class="accent-box">
+          <span class="box-label">Medidas de mitigación propuestas</span>
+          <p>Reordenamiento ecológico territorial · Mejor manejo de residuos sólidos · Planes forestales sostenibles · Sistemas agroforestales y rotación de cultivos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">09</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 10 — PRECIO INVISIBLE CONTAMINACIÓN
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="El precio invisible de la contaminación">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Economía Ambiental</span><span class="pg">10</span></div>
+  <div class="content">
+    <span class="eyebrow">Economía Ambiental</span>
+    <h1 class="display" style="font-size:36px; margin-bottom:10px;">El precio invisible de la contaminación</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Durante años, muchas actividades económicas han sido evaluadas principalmente por su capacidad de generar riqueza y crecimiento. Sin embargo, cada vez más especialistas advierten que detrás de ese desarrollo existe un costo que rara vez aparece en los balances financieros: el impacto ambiental. Este fenómeno es conocido como el "precio invisible" de la contaminación, un concepto central dentro de la Economía ambiental.</p>
+        <p>Cuando una fábrica emite contaminantes al aire o cuando los residuos industriales llegan a ríos y suelos, los efectos no se limitan únicamente a la empresa que los produce. Las consecuencias se extienden a la salud de las comunidades, a los ecosistemas y a la calidad de vida de las personas.</p>
+        <div class="pull-quote">
+          <p>"El verdadero precio del progreso no solo se mide en ganancias, sino también en el impacto que dejamos en el planeta."</p>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Estos daños, que no siempre son pagados directamente por quienes los generan, forman parte de lo que los economistas llaman <strong>externalidades ambientales</strong>.</p>
+        <p>Según especialistas en Economía ambiental, uno de los principales retos actuales es hacer visibles estos costos. La contaminación del aire puede aumentar enfermedades respiratorias, mientras que el deterioro de los ecosistemas puede afectar la disponibilidad de recursos naturales. Aunque estos efectos tienen consecuencias económicas reales, muchas veces no se reflejan en el precio de los productos o servicios que los originan.</p>
+        <p>Ante esta situación, distintos países han comenzado a implementar políticas destinadas a reducir estos impactos. Medidas como regulaciones ambientales, incentivos para tecnologías más limpias y estrategias de desarrollo sostenible buscan que las actividades económicas consideren también el cuidado del entorno natural.</p>
+        <div class="accent-box">
+          <span class="box-label">Cada vez más expertos coinciden</span>
+          <p>Ignorar el costo ambiental de la contaminación puede generar problemas a largo plazo tanto para la economía como para la sociedad en su conjunto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">10</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 11 — ¿POR QUÉ IMPORTA LA ECONOMÍA AMBIENTAL?
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Por qué importa la economía ambiental">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Economía Ambiental</span><span class="pg">11</span></div>
+  <div class="content">
+    <span class="eyebrow">Economía Ambiental</span>
+    <h1 class="display" style="font-size:38px; margin-bottom:10px;">¿Por qué importa la economía ambiental?</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Los recursos naturales y ambientales se han utilizado como materias primas en la producción de bienes y servicios. Desde la revolución industrial se ha incrementado su uso, por lo que se ha contribuido a la toma de conciencia de que el entorno y los recursos son en realidad escasos.</p>
+        <p>Los ecosistemas nos proporcionan el suministro de agua, de alimentos y los recursos renovables. Contienen la información genética y los procesos necesarios para el desarrollo de la vida. Y aunque el aire limpio, los océanos o la estabilidad climática no pertenecen a nadie en particular, son esenciales para todos.</p>
+        <p>Este tipo de economía administra los recursos ambientales para el beneficio de las generaciones presentes y futuras. Cuando explotamos recursos sin límites, estamos comprometiendo el bienestar de quienes aún no han nacido. La economía tradicional tiende a priorizar el presente; la economía ambiental nos obliga a pensar en el largo plazo.</p>
+      </div>
+      <div>
+        <div class="body-text">
+          <p>Instrumentos como impuestos ambientales, mercados de carbono o regulaciones son mecanismos para hacerlo más responsable. No se trata de frenar la economía, sino de orientarla hacia la sostenibilidad.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+          <div class="accent-box" style="margin:0;">
+            <span class="box-label">Protege los recursos limitados</span>
+            <p>Ayuda a evitar crisis de escasez de los recursos naturales en el futuro.</p>
+          </div>
+          <div class="gold-box" style="margin:0;">
+            <p><strong>Promueve el desarrollo sostenible</strong><br>La producción y el consumo dependen de una estabilidad ecológica del planeta.</p>
+          </div>
+          <div class="accent-box" style="margin:0;">
+            <span class="box-label">Piensa en el largo plazo</span>
+            <p>La economía ambiental determina qué cantidad de recursos naturales deberíamos utilizar en la producción de los distintos bienes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">11</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 12 — PRINCIPIOS BÁSICOS ECONOMÍA AMBIENTAL
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Principios de la economía ambiental">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Economía Ambiental</span><span class="pg">12</span></div>
+  <div class="content">
+    <span class="eyebrow">Economía Ambiental</span>
+    <h1 class="display" style="font-size:36px; margin-bottom:10px;">Los principios básicos de la economía ambiental</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>En las últimas décadas, el crecimiento económico ha sido uno de los principales objetivos de gobiernos y empresas. Sin embargo, este crecimiento muchas veces se ha logrado a costa del medio ambiente: deforestación, contaminación del agua y del aire, y pérdida de biodiversidad.</p>
+        <p>Frente a este panorama surge la economía ambiental, un enfoque que propone integrar el cuidado del entorno natural dentro de las decisiones económicas.</p>
+        <div class="pull-quote">
+          <p>"Para que una economía sea verdaderamente sostenible, primero debe evaluarse su impacto ambiental y las repercusiones que tendrá para el planeta."</p>
+        </div>
+        <p>Uno de los principios básicos de la economía ambiental es reconocer que los recursos naturales son limitados. Bosques, ríos, suelos y océanos tienen una capacidad limitada para regenerarse. Si la economía ignora este hecho, termina generando daños que, a largo plazo, afectan tanto al ambiente como al propio desarrollo económico.</p>
+      </div>
+      <div class="body-text">
+        <div class="accent-box">
+          <span class="box-label">Principio 1</span>
+          <p><strong>Recursos naturales limitados.</strong> Bosques, ríos, suelos y océanos tienen capacidad limitada para regenerarse.</p>
+        </div>
+        <div class="gold-box">
+          <p><strong>Principio 2: Costos ambientales reales.</strong> Muchas actividades productivas generan contaminación o degradación, pero esos daños no siempre se reflejan en el precio de los productos. Quien contamina debe pagar.</p>
+        </div>
+        <div class="accent-box">
+          <span class="box-label">Principio 3</span>
+          <p><strong>Innovación sostenible.</strong> Energías renovables, economía circular, reciclaje y uso eficiente de los recursos: la economía puede desarrollarse mientras protege el planeta.</p>
+        </div>
+        <p style="margin-top:14px; font-size:12.5px; color:var(--muted); line-height:1.6;">Solo al considerar primero el impacto ambiental podremos construir un futuro en el que progreso y naturaleza puedan coexistir de manera equilibrada.</p>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">12</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 13 — CONSUMISMO Y FAMILIAS
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Consumismo y economía familiar">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Consumismo</span><span class="pg">13</span></div>
+  <div class="content">
+    <span class="eyebrow">Consumismo</span>
+    <h1 class="display" style="font-size:36px; margin-bottom:10px;">Consumismo y su impacto en la economía de familias</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>El consumismo ha sido definido como una tendencia a comprar bienes o servicios de forma acumulativa y que va más allá de las necesidades básicas de una persona. Se ha convertido en una característica actual de la sociedad, donde la publicidad constante en las redes sociales y la presión social han fomentado las compras innecesarias de bienes y servicios.</p>
+        <p>El origen del consumismo se encuentra en Estados Unidos, durante la época de la industrialización, aproximadamente en 1920. En ese momento hubo una sobreproducción de todo tipo de objetos, gracias a las innovaciones que se aplicaron dentro del sector industrial. A partir de entonces, hasta la actualidad, empezó a expandirse la tendencia al consumismo en diversos países.</p>
+        <div class="stat-block">
+          <span class="stat-num">1920</span>
+          <span class="stat-label">Origen del consumismo moderno en Estados Unidos</span>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>En muchos hogares, el aumento del consumo está relacionado con un mayor nivel de endeudamiento. Algunos estudios sobre la economía doméstica indican que cuando las familias recurren con mayor frecuencia a créditos o tarjetas para mantener un nivel de consumo, disminuye su capacidad de ahorro y aumenta el riesgo de problemas financieros a largo plazo.</p>
+        <p>La facilidad para comprar, especialmente a través de internet y con tarjetas de crédito, ha provocado que muchas familias realicen compras impulsivas. Esto puede generar desequilibrios en el presupuesto del hogar, aumentar las deudas y reducir la capacidad de ahorro.</p>
+        <div class="accent-box">
+          <span class="box-label">Jóvenes y publicidad digital</span>
+          <p>En el caso de los niños y adolescentes, la constante exposición a publicidad digital y redes sociales puede incentivar el deseo de consumir continuamente, lo que dificulta el aprendizaje de hábitos de ahorro y responsabilidad financiera.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">13</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 14 — CONSUMISMO EN MÉXICO
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Consumismo en México">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Consumismo</span><span class="pg">14</span></div>
+  <div class="content">
+    <span class="eyebrow">Consumismo en México</span>
+    <h1 class="display" style="font-size:34px; margin-bottom:6px;">De apariencias y deudas: cuando gastar más de lo que se tiene se vuelve costoso</h1>
+    <div class="label-tag-gold">Consumismo provocó cambio climático, desigualdad e injusticia: estudio</div>
+    <hr class="rule">
+    <div class="col-2">
+      <div class="body-text">
+        <p>De acuerdo con una nota publicada el 8 de febrero de 2021, el consumismo tiene un fuerte impacto en el medio ambiente y contribuye al cambio climático. El informe <em>"El Consumismo en México y sus impactos en el Cambio Climático"</em>, elaborado por Greenpeace y el ITESO, señala que muchas decisiones cotidianas, como la forma de vestir, el transporte o la compra de productos, generan efectos negativos en el planeta.</p>
+        <p>Especialistas de Greenpeace proponen impulsar el consumo responsable y el comercio justo como alternativas para reducir la huella ecológica y combatir la desigualdad ambiental.</p>
+        <div class="pull-quote">
+          <p>"En muchas familias, el deseo de mejorar la calidad de vida o de aparentar estabilidad económica puede llevar a tomar decisiones financieras poco responsables."</p>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Uno de los factores que contribuyen a esta situación es la facilidad para adquirir productos a crédito. Muchas personas consideran que comprar a plazos es una solución inmediata para obtener bienes que desean, sin analizar con detenimiento las consecuencias a largo plazo.</p>
+        <p>Otro problema frecuente es el desconocimiento sobre el uso adecuado de las tarjetas de crédito. Las tarjetas representan un préstamo que debe pagarse posteriormente, muchas veces con intereses que aumentan la deuda si no se maneja de forma responsable.</p>
+        <div class="accent-box">
+          <span class="box-label">El ciclo de la deuda</span>
+          <p>Este mito de que el crédito es "dinero fácil" puede generar un ciclo de gastos y pagos mínimos que prolonga las deudas durante largos periodos, afectando la capacidad de ahorro y estabilidad económica familiar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">14</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 15 — CONSUMISMO: ¿ALIADO O ENEMIGO?
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Consumismo aliado o enemigo">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Consumismo</span><span class="pg">15</span></div>
+  <div class="content">
+    <span class="eyebrow">Análisis · Consumismo</span>
+    <h1 class="display" style="font-size:42px; margin-bottom:10px;">Consumismo: ¿aliado o enemigo?</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Si nos damos cuenta, como seres humanos en nuestras vidas es indispensable el consumo, ya sea para comer, vestirnos, desplazarnos, trabajar o entretenernos; al final, los productos y servicios nos permiten cumplir con nuestras actividades diarias. Sin embargo, se puede considerar un problema cuando no sabemos consumir y se ve reflejado negativamente en nuestra economía.</p>
+        <p>El consumismo sugiere que el aumento del consumo impulsado por el mercado mejora la felicidad y el bienestar mediante la adquisición de bienes y servicios. Se considera vital para el crecimiento económico, pero también se destacan problemas como la ansiedad social, el impacto ambiental y el consumo excesivo.</p>
+        <p>Puede pensarse que el consumo de recursos es inevitable para nuestra supervivencia. Sin embargo, hay una diferencia entre el consumo necesario y vital, y el consumismo: la tendencia por acumular y reemplazar vorazmente bienes y servicios que incluyen muchos productos no esenciales.</p>
+      </div>
+      <div>
+        <div class="gold-box">
+          <p style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; text-align:center; line-height:1.3;">¿El consumismo es malo o bueno?</p>
+        </div>
+        <div class="accent-box" style="margin-top:0;">
+          <span class="box-label">La respuesta</span>
+          <p style="font-size:15px; font-weight:600;">En realidad no es lo uno ni lo otro — depende del nivel y de la forma en la que se practique.</p>
+        </div>
+        <div class="body-text" style="margin-top:16px;">
+          <p>El consumo es esencial en todas las familias. Nos ayuda a satisfacer nuestras necesidades, mejora la calidad de vida y aparte impulsa la economía. Si las familias consumen, las empresas producen y así generan empleo.</p>
+          <p>Pero si se empieza a gastar en exceso, sobre todo en cosas innecesarias, las familias pueden generar deudas infinitas, pocos ahorros e inestabilidad económica.</p>
+        </div>
+        <div style="border: 2px solid var(--gold); padding:14px; margin-top:10px; text-align:center;">
+          <p style="font-family:'Playfair Display',serif; font-size:13px; font-style:italic; color:var(--accent);">El problema no es consumir, sino consumir sin control.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">15</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 16 — SALUD EN MÉXICO
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Salud en México - saturación">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Salud Pública</span><span class="pg">16</span></div>
+  <div class="content">
+    <span class="eyebrow">Salud Pública</span>
+    <h1 class="display" style="font-size:32px; margin-bottom:10px;">Acceso a los servicios de salud en México: entre la saturación y la atención humana</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>En México, el acceso a los servicios de salud públicos sigue siendo uno de los temas más discutidos dentro del sistema sanitario nacional. Instituciones como el <strong>IMSS, ISSSTE e INSABI</strong> tienen la responsabilidad de brindar atención médica a millones de mexicanos. Sin embargo, en la práctica, muchos ciudadanos enfrentan dificultades para acceder a servicios oportunos y completos.</p>
+        <p>Uno de los problemas más señalados por la población es la falta de medicamentos en hospitales generales y centros de salud públicos. Pacientes que acuden a consulta con frecuencia reciben recetas que posteriormente no pueden surtirse dentro del propio hospital. Esto obliga a muchas personas a buscar los medicamentos en farmacias privadas, lo que representa un gasto adicional que no todos pueden cubrir.</p>
+      </div>
+      <div class="body-text">
+        <p>La escasez de insumos médicos también afecta la continuity de tratamientos, especialmente en enfermedades crónicas que requieren medicamentos constantes.</p>
+        <p>Otro aspecto que genera inconformidad es el largo tiempo de espera para obtener citas médicas. En numerosos hospitales públicos, los pacientes deben esperar semanas o incluso meses para recibir atención con un especialista.</p>
+        <div class="stat-block">
+          <span class="stat-num">6/10</span>
+          <span class="stat-label">Mexicanos resuelven sus necesidades de salud más graves en el sector privado</span>
+        </div>
+        <div class="accent-box">
+          <span class="box-label">Sin embargo…</span>
+          <p>Más allá de las limitaciones del sistema, el personal médico y de enfermería suele mostrar compromiso con los pacientes. Una vez dentro del consultorio, muchos profesionales de la salud procuran escuchar, orientar y atender adecuadamente a quienes lo necesitan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">16</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 17 — RETO DEL ACCESO A LA SALUD
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Reto del acceso a la salud">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Salud Pública</span><span class="pg">17</span></div>
+  <div class="content">
+    <span class="eyebrow">Salud Pública · Derechos</span>
+    <h1 class="display" style="font-size:34px; margin-bottom:10px;">El reto del acceso a los servicios de salud en México</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>El acceso a los servicios de salud en México continúa siendo un desafío para miles de personas. Aunque la Constitución reconoce este derecho para toda la población, en la realidad muchos ciudadanos todavía enfrentan dificultades para recibir atención médica cuando más lo necesitan.</p>
+        <div class="gold-box">
+          <p><strong>Artículo 4° Constitucional:</strong> toda la población mexicana tiene derecho a la protección de la salud. En términos de la Ley General de Salud (Art. 77 bis1), este derecho constitucional se refiere al derecho de todos los mexicanos a ser incorporados al Sistema de Protección Social en Salud.</p>
+        </div>
+        <p>A partir de estos criterios, se considera que una persona se encuentra en situación de carencia por acceso a los servicios de salud cuando no cuenta con adscripción o derecho a recibir servicios médicos de alguna institución que los presta, incluyendo el IMSS, ISSSTE, Pemex, Ejército, Marina o los servicios médicos privados.</p>
+      </div>
+      <div class="body-text">
+        <p>Actualmente, muchas familias mexicanas tienen que gastar sus propios recursos para acceder a atención médica cuando lo necesitan. El acceso a la atención médica en México conlleva un gasto de bolsillo como condición para resolver las necesidades de salud.</p>
+        <p>En diversas regiones de México, el crecimiento de la población y la alta demanda de consultas médicas han provocado que algunos centros de salud trabajen con una gran cantidad de pacientes, generando filas largas desde tempranas horas del día.</p>
+        <div class="accent-box">
+          <span class="box-label">Objetivo prioritario</span>
+          <p>Mejorar la infraestructura y ampliar la cobertura médica para garantizar el derecho a la salud a toda la población, independientemente de su ubicación geográfica o situación económica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">17</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 18 — ACCESO A SALUD / PERSONAL MÉDICO
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Acceso a salud - población mexicana">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Salud Pública</span><span class="pg">18</span></div>
+  <div class="content">
+    <span class="eyebrow">Salud Pública</span>
+    <h1 class="display" style="font-size:30px; margin-bottom:10px;">El acceso a los servicios de salud por parte de la población mexicana</h1>
+    <hr class="rule-gold">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Uno de los principales problemas es la desigualdad entre regiones y sectores sociales. Las personas que viven en zonas rurales o en comunidades con menos recursos suelen tener más dificultades para acudir a hospitales o clínicas, ya sea por la distancia, la falta de transporte o la escasez de personal médico.</p>
+        <p>Además, muchos hospitales públicos se encuentran saturados, lo que provoca largas filas, tiempos de espera prolongados y, en ocasiones, falta de medicamentos o equipo médico.</p>
+        <div class="pull-quote">
+          <p>"Esta disparidad no solo afecta la salud de las personas, sino que también perpetúa un sistema donde la calidad de la atención depende más de la cartera del paciente que de su necesidad real de atención."</p>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow" style="margin-top:0;">Calidad del personal médico: un factor decisivo</span>
+        <div class="body-text">
+          <p>La calidad del personal médico y de enfermería es un factor determinante para que las necesidades de los pacientes sean realmente satisfechas. La preparación, dedicación y ética de los doctores y enfermeras influyen directamente en la experiencia del paciente.</p>
+          <p>Cuando el personal actúa con negligencia o simplemente no cuenta con la formación suficiente, la atención no se brinda de manera adecuada. Como resultado, muchas personas se ven obligadas a recurrir a servicios privados para garantizar una atención digna y efectiva.</p>
+        </div>
+        <div class="accent-box">
+          <span class="box-label">Conclusión</span>
+          <p>La formación continua, la supervisión ética y el fomento de la vocación en la medicina y enfermería son esenciales para que el sistema de salud cumpla con su misión: satisfacer las necesidades de todas las personas por igual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">18</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 19 — NOTA PERIODÍSTICA 2
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Nota 2 - Gasto de bolsillo en salud">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Nota Periodística</span><span class="pg">19</span></div>
+  <div class="content">
+    <span class="label-tag">Nota Periodística · 2</span>
+    <div class="dateline">Junio 2026</div>
+    <h1 class="article-hed" style="font-size:30px;">Acceso a la salud en México: El impacto económico del "gasto de bolsillo" en las familias</h1>
+    <p class="article-deck">Una proporción significativa de la población enfrenta barreras continuas para acceder a servicios de salud públicos de calidad, con consecuencias directas sobre la economía del hogar.</p>
+    <hr class="rule">
+    <div class="col-2">
+      <div class="body-text">
+        <p>En la actualidad, una proporción significativa de la población en México enfrenta barreras continuas para acceder a servicios de salud públicos de calidad y de forma oportuna. Esta situación se deriva de la saturación de los sistemas de seguridad social y la transición de las instituciones sanitarias públicas, lo que obliga a las familias mexicanas a buscar atención médica en el sector privado, como consultorios adyacentes a farmacias y clínicas particulares.</p>
+        <p>El impacto directo de este fenómeno recae en la economía familiar a través del incremento del llamado <strong>"gasto de bolsillo"</strong>. Cuando un ciudadano no puede recibir medicamentos, estudios de laboratorio o consultas en instituciones como el IMSS, ISSSTE o centros de salud estatales, debe financiar estos servicios con sus propios ingresos.</p>
+      </div>
+      <div class="body-text">
+        <p>Este desembolso imprevisto desequilibra la microeconomía de los hogares. Para las familias de deciles de ingresos más bajos, una enfermedad repentina o el tratamiento de padecimientos crónicos (como diabetes o hipertensión) significa tener que recortar gastos en alimentación, educación o, en casos extremos, recurrir al endeudamiento.</p>
+        <div class="stat-block">
+          <span class="stat-num">6/10</span>
+          <span class="stat-label">Mexicanos resuelven sus necesidades de salud más graves en el sector privado con gasto propio</span>
+        </div>
+        <div class="accent-box">
+          <span class="box-label">Conclusión</span>
+          <p>El acceso a la salud en el país se mantiene no solo como un reto médico, sino como un factor determinante en la pobreza y la desigualdad económica de la población.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">19</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 20 — ARTÍCULO DE OPINIÓN 1
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Opinión 1 - Consumismo devora el futuro familiar">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Artículo de Opinión</span><span class="pg">20</span></div>
+  <div class="content">
+    <span class="label-tag">Artículo de Opinión · 1</span>
+    <h1 class="article-hed" style="font-size:30px; margin-top:8px;">El alto precio de comprar por comprar: Cómo el consumismo devora el futuro familiar</h1>
+    <p class="article-deck">El consumismo desmedido está causando estragos silenciosos, pero letales, en la economía de las familias.</p>
+    <hr class="rule">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Vivimos en una época donde el éxito personal a menudo se mide por la cantidad de bienes que poseemos. Sin embargo, el consumismo desmedido, entendido como la tendencia a adquirir bienes y servicios de manera acumulativa que no son esenciales, está causando estragos silenciosos, pero letales, en la economía de las familias.</p>
+        <p>Los datos son alarmantes: un alto porcentaje de las familias vive "al día" y destina gran parte de sus ingresos al pago de deudas de tarjetas de crédito adquiridas por compras impulsivas, desde el último modelo de teléfono hasta ropa de moda rápida.</p>
+        <div class="pull-quote">
+          <p>"El problema no es el consumo en sí —que es el motor de la economía— sino la falta de educación financiera frente a estrategias de marketing cada vez más agresivas."</p>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Las consecuencias microeconómicas son evidentes. Cuando las familias ceden al consumismo, el ahorro desaparece. Sin un fondo de emergencia, cualquier eventualidad —como la pérdida de empleo o una enfermedad— las empuja a adquirir préstamos con tasas de interés abusivas, creando un ciclo de pobreza.</p>
+        <div class="accent-box">
+          <span class="box-label">Es urgente</span>
+          <p>Que las familias transiten hacia un consumo consciente, priorizando las necesidades reales sobre los deseos fabricados; de lo contrario, seguiremos hipotecando nuestra tranquilidad financiera futura a cambio de gratificación instantánea.</p>
+        </div>
+        <div class="gold-box" style="margin-top:14px;">
+          <p><strong>Recomendación:</strong> Especialistas recomiendan fomentar hábitos de consumo responsable y educación financiera desde temprana edad para romper el ciclo antes de que comience.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">20</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 21 — ARTÍCULO DE OPINIÓN 2
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Opinión 2 - Economía ambiental urgente">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Artículo de Opinión</span><span class="pg">21</span></div>
+  <div class="content">
+    <span class="label-tag">Artículo de Opinión · 2</span>
+    <h1 class="article-hed" style="font-size:30px; margin-top:8px;">Más allá del crecimiento ciego: La urgencia de aplicar la economía ambiental</h1>
+    <p class="article-deck">Durante décadas, la teoría económica tradicional evaluó el progreso ignorando un factor crucial: el planeta tiene recursos finitos.</p>
+    <hr class="rule">
+    <div class="col-2">
+      <div class="body-text">
+        <p>Durante décadas, la teoría económica tradicional evaluó el progreso de las naciones basándose únicamente en la producción y el crecimiento de los mercados, ignorando un factor crucial: el planeta tiene recursos finitos. Es aquí donde la economía ambiental no solo se vuelve relevante, sino indispensable para la supervivencia de nuestro sistema productivo.</p>
+        <p>El principio básico de esta rama es contundente: <strong>internalizar las externalidades</strong>. En términos sencillos, esto significa que quien contamina debe pagar. Actualmente, si una fábrica vierte desechos a un río para reducir sus costos de producción, los costos reales —enfermedades locales, pérdida de fauna, escasez de agua— los termina pagando la sociedad.</p>
+        <div class="pull-quote">
+          <p>"Las empresas no pueden seguir privatizando las ganancias mientras socializan los daños ecológicos."</p>
+        </div>
+      </div>
+      <div class="body-text">
+        <p>Otro principio fundamental que debemos adoptar es la <strong>valoración económica de los servicios ambientales</strong>. Un bosque no solo vale por la madera que se puede extraer de él, sino por el oxígeno que produce y el agua que filtra.</p>
+        <p>Si los gobiernos y los mercados no comienzan a asignar un valor financiero real a la naturaleza —a través de impuestos verdes, bonos de carbono o regulaciones estrictas de sustentabilidad— el colapso ambiental arrastrará inevitablemente consigo al colapso económico.</p>
+        <div class="accent-box">
+          <span class="box-label">Conclusión</span>
+          <p>La economía ambiental no es un freno al desarrollo, es la única forma de garantizar que haya un mañana en el cual desarrollarse.</p>
+        </div>
+        <div style="border-left: 4px solid var(--gold); padding: 12px 16px; margin-top:14px; background:var(--light-bg);">
+          <p style="font-size:12px; color:var(--muted); line-height:1.6;">Herramientas clave: <strong>impuestos verdes · bonos de carbono · regulaciones de sustentabilidad · valoración de servicios ecosistémicos</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">21</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 22 — EXCLUSIVA: VIDEO DEUDA EXTERNA
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Exclusiva - Video Deuda Externa">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Exclusiva</span><span class="pg">22</span></div>
+  <div class="content">
+    <span class="eyebrow">Exclusiva</span>
+    <h1 class="display" style="font-size:40px; margin-bottom:6px;">¿Conoces lo qué es la deuda externa?</h1>
+    <hr class="rule-gold">
+
+    <!-- LAYOUT A DOS COLUMNAS PARA VIDEO VERTICAL -->
+    <div class="col-4060" style="align-items: center; margin-top: 20px;">
+      
+      <!-- COLUMNA IZQUIERDA: REPRODUCTOR VERTICAL -->
+      <div class="video-frame" style="padding: 0; overflow: hidden; border-radius: 8px; border: 3px solid var(--gold); height: 480px;">
+        <!-- Se ajustó la altura a 480px para simular la pantalla de un celular (9:16) -->
+        <video width="100%" height="100%" controls poster="https://placehold.co/400x700/0D0D0D/C9A84C?text=Reproducir+Video" style="object-fit: cover; display: block; outline: none; background: var(--ink);">
+          <source src="videos/VIDEO.mp4" type="video/mp4">
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
+
+      <!-- COLUMNA DERECHA: TEXTO DESCRIPTIVO -->
+      <div>
+        <div class="body-text" style="margin-bottom: 24px;">
+          <p>En este video sobre la <strong>Deuda Pública</strong> conocerás lo que es y su situación actual, los efectos positivos y negativos que tiene en la sociedad, y algunas entrevistas realizadas a personas preguntándoles cuál es su opinión acerca de la deuda.</p>
+        </div>
+        <div class="accent-box" style="margin:0;">
+          <span class="box-label">Correlación con esta edición</span>
+          <p>La deuda externa limita el presupuesto público destinado a salud e inversión ambiental — temas centrales de esta revista.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">22</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 23 — LA TELA REEMPLAZA AL PLÁSTICO
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="La tela reemplaza al plástico">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Reportaje</span><span class="pg">23</span></div>
+  <div class="content">
+    <div style="display:flex; gap:10px; margin-bottom:10px;">
+      <span class="label-tag" style="margin:0;">Políticas económicas</span>
+      <span class="label-tag-gold" style="margin:0;">Desarrollo sustentable</span>
+    </div>
+    <div class="dateline">26 de junio, 2026</div>
+    <h1 class="article-hed" style="font-size:40px;">La tela reemplaza al plástico</h1>
+    <p class="article-deck">Reportaje fotográfico desde el Chedraui de la Guadalupana, región 100, Cancún.</p>
+    <hr class="rule">
+
+    <!-- ETIQUETA DE IMAGEN LISTA PARA USAR CON ARCHIVO LOCAL -->
+    <div style="margin-bottom: 24px;">
+      <div style="border: 1px solid var(--rule); background: var(--light-bg); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+        <!-- INSERTA LA RUTA LOCAL DE TU IMAGEN A CONTINUACIÓN. EJEMPLO: "img/bolsas-chedraui.jpg" -->
+        <img src="img/img.jpg" alt="Bolsas de tela en supermercado Chedraui" style="width: 100%; height: 260px; object-fit: cover; display: block;" onerror="this.src='https://placehold.co/714x260/EEE9E0/6B6560?text=Inserta+tu+foto+local+aqui'">
+      </div>
+      <span class="caption" style="display: block; margin-top: 8px; text-align: right; font-style: italic;">Bolsas reutilizables en cajas del supermercado · Chedraui Guadalupana · Cancún, 2026</span>
+    </div>
+
+    <div class="col-2">
+      <div class="body-text">
+        <p>Actualmente las personas que van a comprar a los supermercados adoptaron de manera definitiva el uso de bolsas de tela reutilizables, esto tras la consolidación de las políticas ambientales que prohíben la distribución de plásticos de un solo uso, en este caso las bolsas de plástico del supermercado.</p>
+      </div>
+      <div class="body-text">
+        <p>Esta transición obligatoria, impulsada por regulaciones gubernamentales, busca mitigar las toneladas de desechos anuales y redirigir el mercado nacional hacia un modelo de desarrollo sustentable y economía circular. De acuerdo con las autoridades ecológicas, la sustitución no solo reduce la contaminación marina, sino que incentiva la producción local de alternativas biodegradables.</p>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">23</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PÁGINA 24 — INFOGRAFÍA: CRISIS 1929 / KEYNES
+══════════════════════════════════════════ -->
+<div class="page" data-document-role="page" data-label="Infografía - Crisis 1929 y Keynes">
+  <div class="running-head"><span class="brand">Perspectiva Mx</span><span class="section-tag">Infografía</span><span class="pg">24</span></div>
+  <div class="content" style="padding-bottom:24px;">
+    <span class="eyebrow" style="text-align: center;">Infografía Secuencial</span>
+    <h1 class="display" style="font-size:32px; margin-bottom:4px; text-align:center;">De la Crisis de <em style="color:var(--gold);">1929</em> al Modelo Keynesiano</h1>
+    <hr class="rule-gold" style="margin-bottom:20px;">
+
+    <div class="infographic-timeline">
+      
+      <!-- PASO 1: El Colapso -->
+      <div class="info-step" style="background: var(--ink); color: var(--white); padding: 18px 20px; border-radius: 8px;">
+        <div class="col-2" style="align-items: center;">
+          <div>
+            <h3 style="font-family:'Playfair Display',serif; font-size:22px; color:var(--gold); margin-bottom:8px;">1. El Colapso (1929)</h3>
+            <p style="font-size: 11.5px; line-height: 1.6; color: rgba(255,255,255,0.85);">En octubre de 1929, la Bolsa de Nueva York se desplomó desatando una crisis global sin precedentes. El modelo de libre mercado absoluto fracasó ante la caída en picada de la economía.</p>
+          </div>
+          <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 16px;">
+            <h4 style="font-family:'Playfair Display',serif; font-size:14px; color:var(--gold); margin-bottom:8px;">⚠️ Causas Principales</h4>
+            <ul style="padding-left: 16px; font-size: 11px; line-height: 1.6; color: var(--white);">
+              <li>Sobreproducción industrial</li>
+              <li>Especulación bursátil desmedida</li>
+              <li>Exceso de créditos sin respaldo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLECHA DE FLUJO -->
+      <div class="info-arrow">⬇</div>
+
+      <!-- PASO 2: Consecuencias -->
+      <div class="info-step">
+        <h3 style="font-family:'Playfair Display',serif; font-size:18px; text-align:center; color:var(--accent); margin-bottom: 4px;">2. Consecuencias Inmediatas</h3>
+        <div class="col-3" style="gap:12px;">
+          <div style="text-align:center; padding:14px; background:var(--white); border: 2px solid var(--accent); border-radius: 8px;">
+            <div style="font-size:28px; margin-bottom:6px;">🏦</div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink);">Cierre de bancos</div>
+          </div>
+          <div style="text-align:center; padding:14px; background:var(--white); border: 2px solid var(--accent); border-radius: 8px;">
+            <div style="font-size:28px; margin-bottom:6px;">🏭</div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink);">Quiebra empresarial</div>
+          </div>
+          <div style="text-align:center; padding:14px; background:var(--white); border: 2px solid var(--accent); border-radius: 8px;">
+            <div style="font-size:28px; margin-bottom:6px;">📉</div>
+            <div style="font-size:11px; font-weight:700; color:var(--ink);">Desempleo masivo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLECHA DE FLUJO -->
+      <div class="info-arrow">⬇</div>
+
+      <!-- PASO 3: Solución Keynesiana -->
+      <div class="info-step" style="background: var(--light-bg); border: 2px solid var(--gold); padding: 18px 20px; border-radius: 8px;">
+        <div style="display:flex; gap: 18px; align-items: center; margin-bottom: 16px;">
+          <!-- IMAGEN DE KEYNES ACTUALIZADA -->
+          <div class="portrait-silhouette" style="width: 85px; height: 85px; flex-shrink: 0; border: 3px solid var(--accent); background: var(--paper);">
+            <img src="img/images.jpg" alt="Retrato de John Maynard Keynes">
+          </div>
+          <div>
+            <h3 style="font-family:'Playfair Display',serif; font-size:22px; color:var(--accent); margin-bottom:4px;">3. La Solución Keynesiana</h3>
+            <p style="font-size: 11.5px; line-height: 1.5; color: var(--muted);"><strong>John Maynard Keynes</strong> propuso que, para salir de la crisis y estabilizar el mercado, el Estado debía intervenir activamente, rompiendo con el ideal del libre mercado absoluto.</p>
+          </div>
+        </div>
+        
+        <div class="col-2" style="gap: 16px;">
+           <div class="info-node-dark" style="border-radius: 6px; padding: 14px;">
+              <h4>📋 ¿Qué propuso?</h4>
+              <ul style="padding-left:16px; font-size:11px; line-height:1.6; color:var(--white);">
+                <li>Aumento del gasto público</li>
+                <li>Creación de empleos estatales</li>
+                <li>Impulso directo al consumo interno</li>
+              </ul>
+           </div>
+           <div class="info-node-gold" style="border-radius: 6px; padding: 14px;">
+              <h4>✅ Resultados Esperados</h4>
+              <ul style="padding-left:16px; font-size:11px; line-height:1.6; color:var(--ink);">
+                <li>Reactivación del flujo económico</li>
+                <li>Reducción del desempleo masivo</li>
+                <li>Surgimiento del Estado de Bienestar</li>
+              </ul>
+           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-footer"><span class="footer-brand">Perspectiva Mx · Junio 2026</span><span class="footer-pg">24</span></div>
+</div>
+
+</body>
+</html>
